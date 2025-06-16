@@ -255,7 +255,7 @@ module.exports =
         }
 
         //Check whether course is available for enrollment
-        const {findCourse} = await coursedb.findOne({code: course_code});
+        const findCourse = await coursedb.findOne({code: course_code});
         if(!findCourse)
         {
             return res.status(404).json({Message: "Error: Course not found. Check available courses"});
