@@ -1,6 +1,7 @@
 const express = require("express");
 const authCtrl = require("../Controllers/authCtrl");
 const authToken = require("../middleware/auth");
+const auth = require("../middleware/auth");
 const router = express.Router();
     
 //API for sign up
@@ -31,5 +32,8 @@ router.post("/view-course-enrollment", authCtrl.viewcourseenrollment);
 
 //API for course registration
 router.post("/course-registration", authCtrl.courseregistration);
+
+//API for viewing all users and their roles
+router.get("/allUsers", authCtrl.allUsers);
 
 module.exports = router;
