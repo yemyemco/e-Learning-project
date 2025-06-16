@@ -27,7 +27,7 @@ module.exports =
                 }
             
             //Check whether user already exists
-            const foundUser = await userdb.findOne({email: email});
+            const foundUser = await userdb.findOne({email});
             if(foundUser)
             {
                 return res.status(403).json({Message: "Forbidden! The user ID provided already exists"});
@@ -357,5 +357,16 @@ module.exports =
             return res.status(404).json({Message: "Sorry! No course found"});
         }
         return res.status(200).json({allCourses});
+    },
+
+    //API to view all users and their roles
+    allUsers: async function(req, res)
+    {
+        const users = await userdb.find({}, {_id: 0, firstName: 1, lastName: 1, email: 1, role: 1});
+        if(!users)
+        {
+            return res.status(404).json({Message: "No users found"});
+        }
+        res.status(200).json({Message: users});
     }
 };
